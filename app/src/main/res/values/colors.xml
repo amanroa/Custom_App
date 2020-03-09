@@ -5,5 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="lavender">#f5bcf3</color>
     <color name="black">#000000</color>
+    <color name="purple">#8a00e6</color>
+    <color name="blue">#b3d1ff</color>
 
 </resources>
