@@ -65,9 +65,28 @@ public class MainActivity extends AppCompatActivity {
         button2 = findViewById(R.id.button2);
         num1 = findViewById(R.id.num1);
         num2 = findViewById(R.id.num2);
+        points_txt = findViewById(R.id.points_txt);
+        int val1 = Integer.parseInt((num1.getText()).toString());
+        int val2 = Integer.parseInt((num2.getText()).toString());
+        if (val1 <= val2){
+            points++;
+            points_txt.setText("Points: " + points);
+            Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            points--;
+            points_txt.setText("Points: " + points);
+            Toast.makeText(this, "Incorrect!", Toast.LENGTH_SHORT).show();
+
+        }
     }
     public void new_rand_numbers(){
-
+        int rand_num_1 = (int) (Math.random()*(10 - 1)) + 1;
+        int rand_num_2 = (int) (Math.random()*(10 - 1)) + 1;
+        num1 = findViewById(R.id.num1);
+        num2 = findViewById(R.id.num2);
+        num1.setText(Integer.toString(rand_num_1));
+        num2.setText(Integer.toString(rand_num_2));
     }
 
 }
