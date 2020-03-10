@@ -7,5 +7,8 @@
     <color name="black">#000000</color>
     <color name="purple">#8a00e6</color>
     <color name="blue">#b3d1ff</color>
+    <color name="bright_green">#42f5b6</color>
+    <color name="salmon">#ff6e6e</color>
+
 
 </resources>

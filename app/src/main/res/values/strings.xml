@@ -2,8 +2,11 @@
     <string name="app_name">Custom_App</string>
     <string name="title">Numbers Game!</string>
     <string name="color_change">Change Button Color</string>
-    <string name="instructions">Pick the larger number. Dont like the button colors? Click on the Change Color button to change them. If you can get 500 points, you can get into Harvard!</string>
+    <string name="instructions">Pick the larger number. Dont like the button colors? Click on the Change Color button to change them.
+        Dont like the background color? Click on the Change Background Color button to change it.
+        If you can get 500 points, you can get into Harvard!</string>
     <string name="button1">Option 1</string>
     <string name="button2">Option 2</string>
+    <string name="background_change">Change Background Color</string>
 
 </resources>
