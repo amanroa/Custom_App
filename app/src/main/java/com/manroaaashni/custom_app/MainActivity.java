@@ -5,6 +5,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.Random;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     TextView points_txt;
     ConstraintLayout cl;
     int points;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     Random rand = new Random();
     @Override
@@ -29,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new_rand_numbers();
+        sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+//        editor.clear();
         //use shared pref to save user names and score?
         bg_change = findViewById(R.id.bg_button);
         bg_change.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 num1 = findViewById(R.id.num1);
                 num2 = findViewById(R.id.num2);
                 points_txt = findViewById(R.id.points_txt);
+                points = sharedPreferences.getInt("points", 0);
                 int val1 = Integer.parseInt((num1.getText()).toString());
                 int val2 = Integer.parseInt((num2.getText()).toString());
                 if (val1 >= val2){
@@ -106,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
                     points_txt.setText("Points: " + points);
                     Toast.makeText(getApplicationContext(), "Incorrect!", Toast.LENGTH_SHORT).show();
                 }
+                editor.putInt("points", points);
+                editor.apply();
                 new_rand_numbers();
             }
         });
@@ -120,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 points_txt = findViewById(R.id.points_txt);
                 int val1 = Integer.parseInt((num1.getText()).toString());
                 int val2 = Integer.parseInt((num2.getText()).toString());
+                points  = sharedPreferences.getInt("points", 0);
                 if (val1 <= val2){
                     points++;
                     points_txt.setText("Points: " + points);
@@ -130,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
                     points_txt.setText("Points: " + points);
                     Toast.makeText(getApplicationContext(), "Incorrect!", Toast.LENGTH_SHORT).show();
                 }
+                editor.putInt("points", points);
+                editor.apply();
                 new_rand_numbers();
             }
         });
