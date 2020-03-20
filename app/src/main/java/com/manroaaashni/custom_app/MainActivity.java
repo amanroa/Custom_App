@@ -11,6 +11,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,13 +21,17 @@ public class MainActivity extends AppCompatActivity {
     Button button2;
     Button color_change;
     Button bg_change;
+    Button enter_button;
     TextView num1;
     TextView num2;
     TextView points_txt;
+    TextView users_points;
     ConstraintLayout cl;
     int points;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    EditText editText;
+
 
     Random rand = new Random();
     @Override
@@ -35,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         new_rand_numbers();
         sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-//        editor.clear();
+        editor.clear();
         //use shared pref to save user names and score?
         bg_change = findViewById(R.id.bg_button);
         bg_change.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +68,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        editText = findViewById(R.id.editText);
+        users_points = findViewById(R.id.users_points);
+        enter_button = findViewById(R.id.enter_button);
+        final String usernames = sharedPreferences.getString("usernames", "");
+        final String points_list = sharedPreferences.getString("points_list", "");
+        enter_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String user = editText.getText().toString();
+                editText.setText(" ");
+
+                StringBuilder sb = new StringBuilder();
+                sb.append(usernames).append(",");
+                sb.append(user).append(",");
+                editor.putString("usernames", sb.toString());
+                editor.apply();
+                String[] usernames = sharedPreferences.getString("usernames", " ").split(",");
+
+                StringBuilder sb_1 = new StringBuilder();
+                sb_1.append(points_list).append(",");
+                sb_1.append(points).append(",");
+                System.out.println(sb_1.toString());
+                points = 0;
+                editor.putString("points_list", sb_1.toString());
+                editor.apply();
+                String[] points_list = sharedPreferences.getString("points_list", " ").split(",");
+
+                String enter = "Previous Users:" + "\n";
+                for (int i = 0; i< usernames.length; i++){
+                    enter = enter + usernames[i] + "\n";
+//                    enter = enter + usernames[i] + " " + points_list[i] + "\n";
+                }
+                users_points.setText(enter);
+            }
+        });
 
         color_change = findViewById(R.id.color_change);
         color_change.setOnClickListener(new View.OnClickListener() {
